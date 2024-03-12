@@ -120,3 +120,4 @@ type JobSector struct {
     UniqueConstraint string `gorm:"uniqueIndex:idx_sector_job"`
 }
 
+
