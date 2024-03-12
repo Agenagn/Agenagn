@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	"example.com/agenagn/initializers"
 	"example.com/agenagn/models"
 )
@@ -12,24 +14,28 @@ func init() {
 
 func main() {
 	err := initializers.DB.AutoMigrate(
-        &models.Company{},
-        &models.JobSeeker{},
-        &models.Job{},
-        &models.Application{},
-        &models.EducationInfo{},
-        &models.Bookmark{},
-        &models.Sector{},
-        &models.JobSector{},
-    )
+		&models.Company{},
+		&models.JobSeeker{},
+		&models.Job{},
+		&models.Application{},
+		&models.EducationInfo{},
+		&models.Bookmark{},
+		&models.Sector{},
+		&models.JobSector{},
+	)
 
-    if err != nil {
-        panic("failed to migrate database")
-    }
+	if err != nil {
+		fmt.Println("Failed to migrate database:", err)
+		return
+	}
 
-    // Close the database connection
-    dbSQL, err := initializers.DB.DB()
-    if err != nil {
-        panic("failed to close database connection")
-    }
-    defer dbSQL.Close()
+	fmt.Println("Database migration successful.")
+
+	// Close the database connection
+	dbSQL, err := initializers.DB.DB()
+	if err != nil {
+		fmt.Println("Failed to close database connection:", err)
+		return
+	}
+	defer dbSQL.Close()
 }

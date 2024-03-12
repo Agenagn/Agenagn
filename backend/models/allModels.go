@@ -19,7 +19,7 @@ type Company struct {
     gorm.Model
     Name              string
     RegistrationEmail string `gorm:"unique"`
-    Password          string
+    Password          string 
     Location          string
     Sector            string
     NoOfEmployees     int
@@ -35,20 +35,20 @@ type Company struct {
 
 type JobSeeker struct {
     gorm.Model
-    Name              string
-    Password          string
-    Gender            string
-    DoB               time.Time `gorm:"column:dob"`
-    City              string
-    Region            string
-    SubCityZone       string `gorm:"column:sub_city_zone"`
+    Name              string `gorm:"column:name" binding:"required" json:"name"`
+    Password          string `gorm:"column:password" binding:"required" json:"password"`
+    Gender            string `gorm:"column:gender"  json:"gender"`
+    DoB               time.Time `gorm:"column:dob"  json:"dob"`
+    City              string `gorm:"column:city" json:"city"`
+    Region            string `gorm:"column:region"  json:"region"`
+    SubCityZone       string `gorm:"column:sub_city_zone"  json:"sub_city_zone"`
     PortfolioWebsite  string `gorm:"column:portfolio_website"`
-    LinkedIn          string
-    GitHub            string
-    PhoneNumber       string
-    EmailAddress      string `gorm:"unique"`
+    LinkedIn          string `gorm:"column:linked_in"  json:"linked_in"`
+    // GitHub            string `gorm:"column:github"  json:"github"`
+    PhoneNumber       string `gorm:"column:phone_number" binding:"required" json:"phone_number"`
+    EmailAddress      string `gorm:"unique" binding:"required" json:"email_address"`
     ProfessionalTitle string `gorm:"column:professional_title"`
-    Bio               string
+    Bio               string `gorm:"column:bio"  json:"bio"`
     Applications      []Application `gorm:"foreignKey:UserID"`
     Bookmarks         []Bookmark    `gorm:"foreignKey:UserID"`
     EducationInfos    []EducationInfo `gorm:"foreignKey:UserID"`
