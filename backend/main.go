@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"example.com/agenagn/initializers"
+	"example.com/agenagn/middlewares"
 	"example.com/agenagn/routes"
 	"github.com/gin-gonic/gin"
 )
@@ -15,7 +16,10 @@ func main() {
 		c.String(http.StatusOK, "pong")
 	})
 
+	r.Use(middlewares.Logger())
+	r.Use(middlewares.CorsMiddleware())
+	
 	routes.SetupAuthRoutes(r)
-
+	
 	r.Run(":8080")
 }
