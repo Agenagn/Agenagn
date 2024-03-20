@@ -46,7 +46,7 @@ func SignUp(c *gin.Context) {
 	response.ID = int(user.ID)
 	response.Role = "job_seeker"
 
-	utils.SendToken(c, "job_seeker", response)
+	// utils.SendToken(c, "job_seeker", response)
 }
 
 
